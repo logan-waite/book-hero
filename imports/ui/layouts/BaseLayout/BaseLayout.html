@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="profile col-sm-3">
-        Profile
+        {{> Template.dynamic template=left}}
       </div>
       <div class="main col-sm-6">
         <nav class="navbar navbar-default">
@@ -14,10 +14,10 @@
             </ul>
           </div>
         </nav>
-        Main screen
+        {{> Template.dynamic template=main}}
       </div>
       <div class="books col-sm-3">
-        Book sidebar
+        {{> Template.dynamic template=right}}
       </div>
     </div>
   </div>
