@@ -15,7 +15,7 @@ import '../../ui/pages/login/login.js';
 FlowRouter.route('/', {
   name: 'Feed',
   action() {
-    BlazeLayout.render('BaseLayout', {left:'profile', main: 'feed', right:'book-list' });
+    BlazeLayout.render('BaseLayout', {left:'profile', main: 'feed', right:'bookList' });
   },
 });
 

@@ -1,3 +1,12 @@
-<template name="book-list">
-  This will be the book list.
+<template name="bookList">
+  <div class="book-list">
+    <div id="currently-reading">
+      <h4>Currently Reading</h4>
+      {{> bookTile}}
+    </div>
+    <div id="next-list">
+      <h4>Next Challengers</h4>
+      {{> bookTile}}
+    </div>
+  </div>
 </template>
