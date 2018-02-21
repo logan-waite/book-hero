@@ -1,14 +1,15 @@
 <template name="profile">
   <div id="profile">
+    {{#with user}}
     <div class="profile_pic">
 
     </div>
     <div class="username">
-      Username
+      {{username}}
     </div>
     <div class="level">
       <div class="text">
-        level 12
+        Level {{level}}
       </div>
       <div class="progress">
         <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
@@ -18,12 +19,11 @@
     </div>
     <div class="attributes">
       <ul>
-        <li>8 - Attribute 1</li>
-        <li>6 - Attribute 2</li>
-        <li>5 - Attribute 3</li>
-        <li>5 - Attribute 4</li>
-        <li>4 - Attribute 5</li>
+        {{#each attributes}}
+          <li>{{level}} - {{name}}</li>
+        {{/each}}
       </ul>
     </div>
+    {{/with}}
   </div>
 </template>
