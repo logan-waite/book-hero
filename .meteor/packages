@@ -32,4 +32,3 @@ useraccounts:bootstrap
 useraccounts:flow-routing
 useraccounts:core
 aldeed:collection2
-aldeed:simple-schema

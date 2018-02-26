@@ -11,6 +11,8 @@ import '../../ui/pages/not-found/not-found.js';
 import '../../ui/components/profile/profile.js';
 import '../../ui/components/book-list/book-list.js';
 import '../../ui/pages/accounts/accounts.js';
+import '../../ui/pages/discover/discover.js';
+import '../../ui/pages/feed/feed.js';
 
 var setupUserProfile = function(password, info) {
   info.profile.level = 1;
@@ -83,6 +85,13 @@ FlowRouter.route('/', {
     BlazeLayout.render('BaseLayout', {left:'profile', main: 'feed', right:'bookList' });
   },
 });
+
+FlowRouter.route('/discover', {
+  name: 'Discover',
+  action() {
+    BlazeLayout.render('BaseLayout', {left:'profile', main: 'discover', right:'bookList'});
+  }
+})
 
 FlowRouter.route('/logout', {
   name: "Logout",
