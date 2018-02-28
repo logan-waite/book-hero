@@ -2,11 +2,13 @@
   <div class="book-list">
     <div id="currently-reading">
       <h4>Currently Reading</h4>
-      {{> bookTile}}
+      {{ #each book in currently_reading}}
+        {{> bookTile book}}
+      {{/each}}
     </div>
     <div id="next-list">
       <h4>Next Challengers</h4>
-      {{#each book in list.books}}
+      {{#each book in list}}
         {{> bookTile book}}
       {{/each}}
     </div>

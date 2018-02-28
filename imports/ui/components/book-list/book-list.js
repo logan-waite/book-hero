@@ -28,14 +28,32 @@ Template.bookList.onCreated(function() {
 Template.bookList.helpers({
   list() {
     var list = Lists.findOne();
+    var not_reading_list = [];
 
     for (var i = 0; i < list.books.length; i++) {
       var listedBook = list.books[i];
       var book = Books.findOne({_id:listedBook.book_id})
-      // listedBook.book = book;
-      // delete book._id;
-      Object.assign(listedBook, book);
+
+      if (! listedBook.currently_reading && ! listedBook.finished) {
+        not_reading_list.push(Object.assign(listedBook, book));
+      }
     }
-    return list;
+
+    return not_reading_list;
+  },
+  currently_reading() {
+    var list = Lists.findOne();
+    var currently_reading_list = [];
+
+    for (var i = 0; i < list.books.length; i++) {
+      var listedBook = list.books[i];
+      var book = Books.findOne({_id:listedBook.book_id})
+
+      if (listedBook.currently_reading) {
+        currently_reading_list.push(Object.assign(listedBook, book));
+      }
+    }
+
+    return currently_reading_list;
   }
 })

@@ -23,8 +23,6 @@ Template.bookTile.events({
         console.log(error);
       } else if (result === undefined) {
         console.log("addBookToList returned undefined");
-      } else {
-        console.log(result + " books added to list")
       }
     })
   },
@@ -38,8 +36,40 @@ Template.bookTile.events({
       } else if (result === undefined) {
         console.log("isBookInList returned undefined");
       } else {
-        console.log(result)
+        if (result) {
+          Meteor.call('setBookToCurrentlyReading', book_id, (error, result) => {
+            if (error) {
+              console.log(error);
+            } else if (result === undefined) {
+              console.log("isBookInList returned undefined");
+            }
+          });
+        } else {
+          Meteor.call("addBookToList", book_id, Meteor.user().profile.list_id, (error, result) => {
+            if (error) {
+              console.log(error);
+            } else if (result === undefined) {
+              console.log("addBookToList returned undefined");
+            } else {
+              Meteor.call('setBookToCurrentlyReading', book_id, (error, result) => {
+                if (error) {
+                  console.log(error);
+                } else if (result === undefined) {
+                  console.log("isBookInList returned undefined");
+                }
+              });
+            }
+          })
+        }
       }
+    })
+  },
+  'click .finish-reading'(event) {
+    event.preventDefault();
+
+    var book_id = getBookId(event.target);
+    Meteor.call("setBookToFinished", book_id, (error_result) => {
+      
     })
   }
 })

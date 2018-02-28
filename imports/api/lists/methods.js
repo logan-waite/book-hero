@@ -26,6 +26,51 @@ Meteor.methods({
       {_id:list_id},
       { $push : { books: book } }
     )
+  },
+  isBookInList(book_id) {
+    check(book_id, String);
 
+    var list_id = Meteor.user().profile.list_id;
+    var list = Lists.findOne({_id:list_id});
+
+    for (var i = 0; i < list.books.length; i++) {
+      var book = list.books[i];
+      if (book_id == book.book_id) {
+        return true;
+      }
+    }
+    return false;
+  },
+  setBookToCurrentlyReading(book_id) {
+    check(book_id, String);
+
+    var list_id = Meteor.user().profile.list_id;
+    var list = Lists.findOne({_id:list_id});
+
+    for (var i = 0; i < list.books.length; i++) {
+      var book = list.books[i];
+      if (book_id == book.book_id) {
+        return Lists.update(
+          {_id:list_id, books : {$elemMatch: {book_id : book_id}}},
+          { $set : {"books.$.currently_reading": true}}
+        )
+      }
+    }
+  },
+  setBookToFinished(book_id) {
+    check(book_id, String);
+
+    var list_id = Meteor.user().profile.list_id;
+    var list = Lists.findOne({_id:list_id});
+
+    for (var i = 0; i < list.books.length; i++) {
+      var book = list.books[i];
+      if (book_id == book.book_id) {
+        return Lists.update(
+          {_id:list_id, books : {$elemMatch: {book_id: book_id}}},
+          {$set : {"books.$.currently_reading" : false, "books.$.finished" : true, "books.$.date_finished" : new Date()}}
+        )
+      }
+    }
   }
 });
