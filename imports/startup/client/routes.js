@@ -17,6 +17,7 @@ import '../../ui/pages/feed/feed.js';
 var setupUserProfile = function(password, info) {
   info.profile.level = 1;
   info.profile.xp = 0;
+  info.profile.list_id = "";
   info.profile.attributes = [
     {
       name : "Intelligence",

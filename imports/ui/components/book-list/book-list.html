@@ -6,7 +6,9 @@
     </div>
     <div id="next-list">
       <h4>Next Challengers</h4>
-      {{> bookTile}}
+      {{#each book in list.books}}
+        {{> bookTile book}}
+      {{/each}}
     </div>
   </div>
 </template>

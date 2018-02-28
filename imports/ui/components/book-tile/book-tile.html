@@ -7,11 +7,16 @@
       <span class="book-title">{{title}}</span><br>
       <span class="book-author">{{author}}</span>
     </div>
-    <div class="book-actions">
+    <div class="book-actions" value="{{_id}}">
       <div class="btn-group">
-        <button type="button" class="btn btn-default add-to-book-list">Add to List</button>
-        <button type="button" class="btn btn-default start-reading">Start Reading</button>
-        <button type="button" class="btn btn-default finish-reading">Finish</button>
+        {{#if notInList}}
+          <button type="button" class="btn btn-default add-to-list">Add to List</button>
+        {{/if}}
+        {{#if currently_reading}}
+          <button type="button" class="btn btn-default finish-reading">Finish</button>
+        {{else}}
+          <button type="button" class="btn btn-default start-reading">Start Reading</button>
+        {{/if}}
       </div>
     </div>
   </div>
