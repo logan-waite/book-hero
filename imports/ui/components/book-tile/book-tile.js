@@ -15,16 +15,24 @@ Template.bookTile.events({
 
     var book_id = getBookId(event.target);
     var list_id = Meteor.user().profile.list_id;
-    console.log(list_id);
 
-    // Now if the user has a list, add the book to the list (but not as currently reading);
-    Meteor.call("addBookToList", book_id, Meteor.user().profile.list_id, (error, result) => {
+    Meteor.call("isBookInList", book_id, (error, result) => {
       if (error) {
         console.log(error);
       } else if (result === undefined) {
         console.log("addBookToList returned undefined");
+      } else {
+        if (! result) {
+          Meteor.call("addBookToList", book_id, Meteor.user().profile.list_id, (error, result) => {
+            if (error) {
+              console.log(error);
+            } else if (result === undefined) {
+              console.log("addBookToList returned undefined");
+            }
+          })
+        }
       }
-    })
+    });
   },
   'click .start-reading'(event) {
     event.preventDefault();
@@ -69,7 +77,11 @@ Template.bookTile.events({
 
     var book_id = getBookId(event.target);
     Meteor.call("setBookToFinished", book_id, (error_result) => {
-      
+      if (error) {
+        console.log(error);
+      } else if (result === undefined) {
+        console.log("addBookToList returned undefined");
+      }
     })
   }
 })

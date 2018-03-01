@@ -19,7 +19,18 @@ var Schema = new SimpleSchema({
     label: "Brief Summary",
     optional: true,
     max: 1000
-  }
+  },
+  xp: {
+    type : Number
+  },
+  attributes: {
+    type: Array,
+    minCount: 1,
+    maxCount: 3
+  },
+  "attributes.$" : Object,
+  "attributes.$.name" : String,
+  "attributes.$.points" : Number
 })
 
 Books.attachSchema(Schema);
