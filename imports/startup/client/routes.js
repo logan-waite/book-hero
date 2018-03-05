@@ -13,6 +13,7 @@ import '../../ui/components/book-list/book-list.js';
 import '../../ui/pages/accounts/accounts.js';
 import '../../ui/pages/discover/discover.js';
 import '../../ui/pages/feed/feed.js';
+import '../../ui/pages/contribute/contribute.js';
 
 var setupUserProfile = function(password, info) {
   info.profile.level = 1;
@@ -47,7 +48,19 @@ var setupUserProfile = function(password, info) {
   ]
 }
 
-FlowRouter.triggers.enter([AccountsTemplates.ensureSignedIn]);
+var onChangeNavbar = function() {
+  var routeName = FlowRouter.getRouteName().toLowerCase();
+  if (routeName == "feed") {
+    routeName = "";
+  }
+  const selector = '.nav a[href="/' + routeName + '"]';
+  $('.active').removeClass('active');
+  setTimeout(function() {
+    $(selector).parent("li").addClass('active');
+  },10)
+}
+
+FlowRouter.triggers.enter([AccountsTemplates.ensureSignedIn, onChangeNavbar]);
 
 AccountsTemplates.configure({
   defaultLayout: 'AccountLayout',
@@ -92,7 +105,14 @@ FlowRouter.route('/discover', {
   action() {
     BlazeLayout.render('BaseLayout', {left:'profile', main: 'discover', right:'bookList'});
   }
-})
+});
+
+FlowRouter.route('/contribute', {
+  name: 'Contribute',
+  action() {
+    BlazeLayout.render('BaseLayout', {left: 'profile', main: 'contribute', right:'bookList'});
+  }
+});
 
 FlowRouter.route('/logout', {
   name: "Logout",

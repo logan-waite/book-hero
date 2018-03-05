@@ -6,7 +6,7 @@ Template.profile.helpers({
     // console.log(user);
     if (user !== undefined) {
       var progress_bar = (user.profile.xp / 2500) * 100;
-      console.log(progress_bar)
+
       var userInfo = {
         username : user.username,
         level : user.profile.level,
